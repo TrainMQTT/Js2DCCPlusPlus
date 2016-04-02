@@ -1,0 +1,13 @@
+{
+    "name"         : "train-mqtt-node",
+    "version"      : "0.0.1",
+    "description"  : "Train MQTT node",
+    "dependencies": {
+    },
+    "keywords": [ "node-red" ],
+    "node-red"     : {
+        "nodes": {
+            "sample": "nodes/power/power.js"
+        }
+    }
+}

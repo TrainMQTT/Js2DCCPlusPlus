@@ -73,3 +73,5 @@ class Engine {
       return DccCommand.build(parts);
     }
 }
+
+module.exports = Engine;

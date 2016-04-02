@@ -1,6 +1,6 @@
 'use strict';
 
-class Engine {
+class EngineFunction {
     constructor(name, cab, id, bool){
       this.name = name;
       this.cab = cab;
@@ -30,3 +30,5 @@ class Engine {
       return DccCommand.build(parts);
     }
 }
+
+module.exports = EngineFunction;

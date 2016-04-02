@@ -7,3 +7,5 @@ class Directions {
       return 0;
     }
 }
+
+module.exports = Directions;

@@ -4,3 +4,5 @@ class DccCommand {
       return "<" + parts.join(" ") + ">";
     }
 }
+
+module.exports = DccCommand;
