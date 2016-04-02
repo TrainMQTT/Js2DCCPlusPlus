@@ -1,8 +1,6 @@
 'use strict';
-class DccCommand {
+export default class DccCommand {
     build(parts){
       return "<" + parts.join(" ") + ">";
     }
 }
-
-module.exports = DccCommand;

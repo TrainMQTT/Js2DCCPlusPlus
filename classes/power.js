@@ -1,7 +1,7 @@
 'use strict';
-var DccCommand = require('./DccCommand');
+var DccCommand = require('./dccCommand');
 
-class Power {
+export default class Power {
     constructor(state){
         if(typeof state === "boolean"){
           state = state ? 1:0;
