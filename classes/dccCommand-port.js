@@ -2,7 +2,7 @@ var DccCommand = function(){
     return this;
 }
 
-DccCommand.prototype.build(parts){
+DccCommand.prototype.build = function(parts){
   return "<" + parts.join(" ") + ">";
 }
 

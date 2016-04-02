@@ -7,15 +7,15 @@ var Power  = function(state){
     }
     this.state = state || false;
 }
-Power.prototype.on(){
+Power.prototype.on = function(){
   this.state = 1;
 }
 
-Power.prototype.off(){
+Power.prototype.off = function(){
   this.state = 0;
 }
 
-Power.prototype.toCommand(){
+Power.prototype.toCommand = function(){
   var parts = [
     this.state
   ];
