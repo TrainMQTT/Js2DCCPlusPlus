@@ -3,7 +3,12 @@ var DccCommand = require('./dccCommand-port');
 
 var Power  = function(state){
     if(typeof state === "boolean"){
-      state = state ? 1:0;
+      if(state){
+        state = 1;
+      }else{
+        state = 0;
+      }
+
     }
     this.state = state || false;
 }
