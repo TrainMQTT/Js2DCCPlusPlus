@@ -1,4 +1,4 @@
-var Power = require('../../classes/power');
+var Power = require('../../classes/power-port');
 
 module.exports = function(RED) {
 
