@@ -1,25 +1,25 @@
 <script type="text/javascript">
-    RED.nodes.registerType('node-type', {
+    RED.nodes.registerType('power', {
         category: "Train MQTT",
         defaults: {
             power:{ value: false, type: "boolean" },
             name: { value: "" }
         },
         inputs: 1,
-        outpus: 1,
-        icon: "",
-        color: "#ffff00",
+        outputs: 1,
+        icon: "light.png",
+        color: "#ffffcc",
         label: function(){
           return this.name || "Power State"
         }
     });
 </script>
-<script type="text/x-red" data-template-name="node-type">
+<script type="text/x-red" data-template-name="power">
     <div class="form-row">
         <label for="node-input-power"><i class="fa fa-tag"></i> Power</label>
         <select id="node-input-power">
-          <option value="false">Off<option>
-          <option value="true">On<option>
+          <option value="false">Off</option>
+          <option value="true">On</option>
         </select>
     </div>
     <div class="form-row">
@@ -27,6 +27,6 @@
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
 </script>
-<script type="text/x-red" data-help-name="lower-case">
+<script type="text/x-red" data-help-name="power">
     <p>A node that you can power on or off your TrainMQTT system</p>
 </script>
