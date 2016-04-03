@@ -10,7 +10,15 @@ var Power  = function(state){
       }
 
     }
-    this.state = state || false;
+    if(typeof state === "string"){
+	if(state === 'true'){
+            state = 1;
+	}
+	if(state === 'false'){
+		state = 0;
+	}
+    }
+    this.state = state || 0;
 }
 Power.prototype.on = function(){
   this.state = 1;
@@ -24,7 +32,7 @@ Power.prototype.toCommand = function(){
   var parts = [
     this.state
   ];
-  return DccCommand.build(parts);
+  return DccCommand.prototype.build(parts);
 }
 
 
