@@ -1,77 +1,79 @@
-'use strict';
+var Engine = (function(){
+  'use strict';
 
-class Engine {
-    constructor(address, register){
+  if(typeof require === 'function'){
+    var EngineFunction = require('./engineFunction');
+  }
+
+  var Engine = function(address, register){
+      this._id = null;
+      this._rev = null;
+      this._type = "Engine";
+
       this.cab = address || 3;
-      this._speed = 0;
+      this.speed = 0;
       this.register = register || 1;
-      this._speedSteps = 28;
+      this.speedSteps = 28;
       this.lightOn = false;
       this.direction = Directions.forward;
-      this.functions = {};
-    }
 
-    toggleLight(){
+      this._functions = {};
+
+      speedStepsSetter(this);
+      return this;
+  }
+
+  Engine.prototype.fromJS = function(propertyObject){
+       var instance = Object.create(Engine, propertyObject);
+       speedStepsSetter(instance);
+       return instance;
+  }
+
+  Engine.prototype.toggleLight = function(){
       this.lightOn = !this.lightOn;
-    }
-
-    stop(){
+      return this;
+  }
+  Engine.prototype.stop = function(){
       this.speed = 0;
-    }
+      return this;
+  }
+  Engine.prototype.switchDirection = function(){
+      switch(this.direction){
+        case -1:
+          this.direction = 1;
+          break;
+        case 1:
+          this.direction = -1;
+          break;
+      }
+      return this;
+  }
+  Engine.prototype.addFunction = function(id, bool, name){
+      if(typeof EngineFunction === 'function' ){
+          name = name || id;
+          var fn = new EngineFunction(name, this.cab, id, bool);
+          this._functions[name] = fn;
+          return fn;
+      }
+      return null;
+  }
 
-    switchDirection(){
-      this.direction = Directions.reverse;
-    }
+  Engine.prototype.getFunction = function(name){
+    return this._functions[name];
+  }
 
-    get speed(){
-      return this._speed;
-    }
+  function speedStepsSetter(EngineInstance){
+      Object.defineProperty(EngineInstance, 'speedSteps', {
+          set: function(value) {
+            var adjustment = value/this.speedSteps;
+            this.speed = (this.speed * adjustment);
+          }
+      });
+  }
 
-    set speed(value){
-        if(value <= this.speedSteps){
-          this._speed = value;
-        }
-    }
+  return Engine;
+})();
 
-    get speedSteps(){
-      return this._speedSteps;
-    }
-
-    set speedSteps(value){
-      var adjustment = value/this._speedSteps;
-      this.setSpeed(this._speed * adjustment);
-      this._speedSteps = value;
-    }
-
-    setSpeedSteps(steps){
-      this.speedSteps = steps
-    }
-
-    setSpeed(speed){
-      this.speed = speed;
-    }
-
-    addFunction(id, bool, name){
-      name = name || id;
-      var fn = new EngineFunction(name, this.cab, id, bool);
-      this.functions[name] = fn;
-      return fn;
-    }
-
-    getFunction(name){
-      return this.functions[name];
-    }
-
-    toCommand(){
-      var parts = [
-        "t" //throttle indicator
-        this.register,
-        this.cab,
-        this.speed,
-        this.direction
-      ];
-      return DccCommand.build(parts);
-    }
+if(module){
+  module.exports = Engine;
 }
-
-module.exports = Engine;

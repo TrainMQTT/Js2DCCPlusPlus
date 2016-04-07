@@ -1,28 +1,44 @@
-'use strict';
-var DccCommand = require('./dccCommand');
+var Power = (function(){
+  'use strict';
+  if(typeof require === 'function'){
+      var TrainMQTTMessage = require('./trainMQTTMessage');
+  }
 
-export default class Power {
-    constructor(state){
-        if(typeof state === "boolean"){
-          state = state ? 1:0;
-        }
-        this.state = state || false;
-    }
+  var Power  = function(state){
+      this._id = null;
+      this._rev = null;
+      this._type = "Power";
 
-    on(){
-      this.state = 1;
-    }
+      state = state.toString();
+      if(state === "false"){
+          state = "0";
+      }
+      if(state === "true"){
+          state = "1";
+      }
+      state = parseInt(state);
+      this.state = state || 0;
 
-    off(){
-      this.state = 0;
-    }
+      return this;
+  }
+  Power.prototype.on = function(){
+    this.state = 1;
+  }
 
-    toCommand(){
-      var parts = [
-        this.state
-      ];
-      return DccCommand.build(parts);
-    }
-}
+  Power.prototype.off = function(){
+    this.state = 0;
+  }
 
-module.exports = Power;
+  Power.prototype.toMQTT = function(){
+      if(TrainMQTTMessage){
+          return TrainMQTTMessage.prototype.serializeObject(this);
+      }
+      return null;
+  }
+
+  if(module){
+    module.exports = Power;
+  }
+
+  return Power;
+})();

@@ -1,4 +1,4 @@
-var Power = require('../../classes/power-port');
+var Power = require('../../classes/power');
 
 module.exports = function(RED) {
 
@@ -10,7 +10,7 @@ module.exports = function(RED) {
       this.on('input', function(msg) {
           // do something with 'msg'
           var msg = {
-            payload: this.power.toCommand()
+            payload: this.power.toMQTT()
           };
 
           this.send(msg);
