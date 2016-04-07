@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    RED.nodes.registerType('speedUp', {
+        category: "Train MQTT",
+        defaults: {
+            name: { value: "" },
+            steps: { value: 1}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "light.png",
+        color: "#ffffcc",
+        label: function(){
+          return this.name || "Speed Up Engine"
+        }
+    });
+</script>
+<script type="text/x-red" data-template-name="speedUp">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Speed Steps</label>
+        <input type="number" id="node-input-name" placeholder="Enter integer of speed steps">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+<script type="text/x-red" data-help-name="speedUp">
+    <p>A node that speeds up a TrainMQTT Engine object.</p>
+</script>

@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    RED.nodes.registerType('toEngine', {
+        category: "Train MQTT",
+        defaults: {
+            name: { value: "" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "light.png",
+        color: "#ffffcc",
+        label: function(){
+          return this.name || "To Engine"
+        }
+    });
+</script>
+<script type="text/x-red" data-template-name="toEngine">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+<script type="text/x-red" data-help-name="toEngine">
+    <p>A node that you can convert a js object in msg.payload to a TrainMQTT Engine</p>
+</script>
