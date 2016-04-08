@@ -1,0 +1,26 @@
+<html>
+<head>
+	<script src='classes/engine.js'></script>
+	<script src='classes/trainMQTTMessage.js'></script>
+</head>
+<body>
+	<script>
+		train = {
+			_id: 'test',
+			speedSteps: 14,
+			speed: 14,
+			"testing":[1,"string",3]
+		}
+		thing = new Engine(6308, train);
+		console.log(thing);
+		
+		console.log(thing.speedSteps, thing.speed);
+		thing.speedSteps = 28;
+		console.log(thing.speedSteps, thing.speed);
+		
+		var nvp = TrainMQTTMessage.serializeObject(thing);
+		console.log(nvp);
+		
+	</script>
+</body>
+</html>

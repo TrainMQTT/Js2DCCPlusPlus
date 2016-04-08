@@ -1,22 +1,21 @@
 var TrainMQTTMessage = (function(){
     var TrainMQTTMessage = function(){
-        return this;
-    }
-
-    TrainMQTTMessage.prototype.serializeObject(object){
-        var keys = Object.keys(object);
-        var queryPairs = [];
-        keys.forEach(function(key){
-            if(typeof object[key].toString === 'function'){
-                var pair = key + "=" + object[key];
-                queryPairs.push(pair);
-            }
-        });
-        return queryPairs.join("&");
-    }
-
+		this.serializeObject = function(object){
+			var keys = Object.keys(object);
+			var queryPairs = [];
+			keys.forEach(function(key){
+				if(object[key] === undefined || object[key] === null || (typeof object[key].toString === 'function' && object[key].toString() !== '[object Object]')){					
+					var pair = key + "=" + object[key];
+					queryPairs.push(pair);
+				}
+			});
+			return queryPairs.join("&");
+		}
+		
+		return this;
+	};
+	if(typeof module !== "undefined"){
+	  module.exports = TrainMQTTMessage;
+	}
+	return new TrainMQTTMessage();
 })();
-
-if(module){
-  module.exports = TrainMQTTMessage;
-}
