@@ -13,14 +13,19 @@
 		}
 		thing = new Engine(6308, train);
 		console.log(thing);
-		
+
 		console.log(thing.speedSteps, thing.speed);
 		thing.speedSteps = 28;
 		console.log(thing.speedSteps, thing.speed);
-		
+
 		var nvp = TrainMQTTMessage.serializeObject(thing);
-		console.log(nvp);
-		
+		console.log("Can make NVP", nvp);
+
+
+		thing.throttle = -.5;
+		console.log('Throttle Position', thing.throttle);
+		console.log('Train Speed', thing.speed);
+		console.log('Train Direction', thing.direction);
 	</script>
 </body>
 </html>

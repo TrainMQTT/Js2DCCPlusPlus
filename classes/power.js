@@ -5,9 +5,7 @@ var Power = (function(){
   }
 
   var Power  = function(state){
-      this._id = null;
-      this._rev = null;
-      this._type = "Power";
+      this.type = "Power";
 
       state = state.toString();
       if(state === "false"){
@@ -36,7 +34,7 @@ var Power = (function(){
       return null;
   }
 
-  if(module){
+  if(typeof module !== 'undefined'){
     module.exports = Power;
   }
 

@@ -4,7 +4,6 @@ class EngineFunction {
     constructor(name, cab, id, bool){
       this.name = name;
       this.cab = cab;
-      this.id = id;
       this.value = bool || "";
     }
 
